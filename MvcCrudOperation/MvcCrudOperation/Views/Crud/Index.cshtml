@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MvcCrudOperation.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="well text-info"> <span class="glyphicon glyphicon-list"></span> Employee List</h2>
+<br />
+
+<hr />
+
+<p>
+    <a href="@Url.Action("Create","Crud")" class="btn btn-success">
+
+        <span class="glyphicon glyphicon-plus"></span>
+        Create New Employee
+    </a>
+</p>
+
+<table class="table table-bordered table-striped table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Employee Name</th>
+            <th>Employee Salary</th>
+            <th>Employee Designation</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_designation)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Crud",new { id = item.emp_id })"><span class="glyphicon glyphicon-pencil text-info"></span></a>&nbsp;&nbsp;
+                    <a href="@Url.Action("Delete","Crud",new { id = item.emp_id })"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.emp_id }) |*@
+
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.emp_id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
