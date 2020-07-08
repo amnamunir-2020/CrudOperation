@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery.js"></script>
+
+<h2>Display Data</h2>
+<input class="btn-info" type="button" value="Get All Employee" id="btn1"/>
+<br />
+<br />
+
+<input  type="text" placeholder="Enter Employee Id" id="txt"/>
+
+<input class="btn-primary" type="button" value="Get  Employee By Id" id="btn3" />
+
+<input  type="button" value="Clear" id="btn2" />
+<br />
+<div id="displayData">
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#btn3").click(function () {
+
+            var id = $("#txt").val();
+            $.getJSON('/api/EmployeesData/' + id, function (responseData) {
+                var item = "<h2>" + responseData + "</h2>";
+                $(item).appendTo("#displayData");
+
+
+            });
+        });
+
+        $("#btn2").click(function () {
+
+            $("#displayData").empty();
+        });
+
+
+
+        $("#btn1").click(function () {
+
+
+            $.getJSON('/api/EmployeesData', function (responseData) {
+                //jquery each method find element iterate
+                $.each(responseData, function (key, val) {
+                    var item = "<h2>" + val + "</h2>";
+                    $(item).appendTo("#displayData");
+
+                });
+
+            });
+
+
+
+
+        });
+
+
+
+
+    });
+
+
+    </script>
